@@ -31,22 +31,23 @@ namespace dev.sthorne.AdventOfCode.Puzzles.Solution
 
 		public override string ToString()
 		{
-			var repr = @$"{Year}-{Day.ToString("00")}:
-	Read Input Duration: {ReadInputDuration.TotalMilliseconds}
-	Process Input Duration: {ProcessInputDuration.TotalMilliseconds}";
+			var repr = @$"{Year}-{Day:00}:
+	Read Input Duration: {ReadInputDuration.TotalMilliseconds:0.00}ms
+	Process Input Duration: {ProcessInputDuration.TotalMilliseconds:0.00}ms
+";
 
 			for (int i = 0; i < PuzzleSolutionData.Count; i++)
 			{
 				var data = PuzzleSolutionData[i];
 				repr += @$"
 	Puzzle {i + 1}:
-		Solution: {data.Solution}
-		Duration: {data.Duration.TotalMilliseconds}
+		Solution: {data.Solution ?? "null"}
+		Duration: {data.Duration.TotalMilliseconds:0.00}ms
 ";
 			}
 
 			repr += @$"
-	Total Duration: {TotalDuration.TotalMilliseconds}";
+	Total Duration: {TotalDuration.TotalMilliseconds:0.00}ms";
 
 			return repr;
 		}

@@ -61,6 +61,7 @@ namespace dev.sthorne.AdventOfCode.Puzzles.Day
 			};
 
 			Stopwatch sw = new Stopwatch();
+			sw.Start();
 
 			await ReadInput();
 			solutionData.ReadInputDuration = RecordDuration(sw);
@@ -70,8 +71,6 @@ namespace dev.sthorne.AdventOfCode.Puzzles.Day
 
 			foreach (var puzzle in Puzzles)
 			{
-				sw.Start();
-
 				var solution = await puzzle();
 
 				solutionData.PuzzleSolutionData.Add(new()
@@ -79,7 +78,6 @@ namespace dev.sthorne.AdventOfCode.Puzzles.Day
 					Solution = solution,
 					Duration = RecordDuration(sw)
 				});
-				sw.Reset();
 			}
 
 			return solutionData;
@@ -88,7 +86,7 @@ namespace dev.sthorne.AdventOfCode.Puzzles.Day
 		private TimeSpan RecordDuration(Stopwatch sw)
 		{
 			var ts = new TimeSpan(sw.Elapsed.Ticks);
-			sw.Reset();
+			sw.Restart();
 			return ts;
 		}
 	}

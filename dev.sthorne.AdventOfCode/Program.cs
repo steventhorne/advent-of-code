@@ -14,7 +14,7 @@ namespace dev.sthorne.AdventOfCode
 		{
 			var host = CreateHostBuilder(args).Build();
 			var resolver = host.Services.GetService<PuzzleServiceResolver>();
-			var puzzle = resolver(2015, 1);
+			var puzzle = resolver(2015, 2);
 
 			Console.WriteLine(await puzzle.Execute());
 		}

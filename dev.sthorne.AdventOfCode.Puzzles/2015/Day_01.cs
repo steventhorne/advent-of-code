@@ -7,15 +7,11 @@ namespace dev.sthorne.AdventOfCode.Puzzles._2015
 	[PuzzleDate(2015, 1)]
 	public class Day_01 : BaseDay
 	{
-		private readonly ILogger<Day_01> Logger;
-
 		private string Directions;
 
 		public Day_01(ILogger<Day_01> logger)
 			: base(logger)
 		{
-			Logger = logger;
-
 			Puzzles.Add(Puzzle_01);
 			Puzzles.Add(Puzzle_02);
 		}
