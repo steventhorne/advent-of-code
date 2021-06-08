@@ -16,7 +16,7 @@ namespace dev.sthorne.AdventOfCode.Puzzles._2015
 			public int Height { get; set; }
 		}
 
-		private List<Dimensions> Presents = new List<Dimensions>();
+		private readonly List<Dimensions> Presents = new();
 
 		public Day_02(ILogger<Day_02> logger)
 			: base(logger)
@@ -65,7 +65,10 @@ namespace dev.sthorne.AdventOfCode.Puzzles._2015
 			int ribbonLength = 0;
 			foreach (var present in Presents)
 			{
-				int wrapLength = 2 * present.Length + 2 * present.Width + 2 * present.Height - 2 * Math.Max(present.Length, Math.Max(present.Width, present.Height));
+				int wrapLength = 2 * present.Length
+					+ 2 * present.Width
+					+ 2 * present.Height
+					- 2 * Math.Max(present.Length, Math.Max(present.Width, present.Height));
 				ribbonLength += wrapLength + present.Length * present.Width * present.Height;
 			}
 			return Task.FromResult((object)ribbonLength);
