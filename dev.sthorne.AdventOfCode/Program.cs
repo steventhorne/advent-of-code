@@ -13,8 +13,11 @@ namespace dev.sthorne.AdventOfCode
 		static async Task Main(string[] args)
 		{
 			var host = CreateHostBuilder(args).Build();
+			var manager = host.Services.GetService<PuzzleServiceConfigurator>();
 			var resolver = host.Services.GetService<PuzzleServiceResolver>();
-			var puzzle = resolver(2015, 4);
+
+			var puzzleDate = manager.GetLatestPuzzleDate();
+			var puzzle = resolver(puzzleDate.Year, puzzleDate.Day);
 
 			Console.WriteLine(await puzzle.Execute());
 		}
@@ -52,7 +55,8 @@ namespace dev.sthorne.AdventOfCode
 					// services.AddDbContext<Context>(options =>
 					//  options.UseSql(conn))
 
-					PuzzleServiceConfigurator.ConfigureServices(context, services);
+					PuzzleServiceConfigurator configurator = new(services);
+					services.AddSingleton(configurator);
 				})
 				.ConfigureLogging((context, logging) =>
 				{

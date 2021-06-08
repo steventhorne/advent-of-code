@@ -1,6 +1,5 @@
 ﻿using dev.sthorne.AdventOfCode.Puzzles.Day;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +9,11 @@ namespace dev.sthorne.AdventOfCode.Puzzles
 {
 	public delegate IDay PuzzleServiceResolver(int year, int day);
 
-	public static class PuzzleServiceConfigurator
+	public class PuzzleServiceConfigurator
 	{
-		public static void ConfigureServices(HostBuilderContext context, IServiceCollection serviceCollection)
+		public readonly Dictionary<int, List<int>> PuzzleDates = new();
+
+		public PuzzleServiceConfigurator(IServiceCollection serviceCollection)
 		{
 			Dictionary<(int, int), Type> serviceDictionary = new Dictionary<(int, int), Type>();
 
@@ -25,6 +26,10 @@ namespace dev.sthorne.AdventOfCode.Puzzles
 				PuzzleDateAttribute puzzleDateAttr = dayType.GetCustomAttribute(typeof(PuzzleDateAttribute)) as PuzzleDateAttribute;
 				if (puzzleDateAttr != null)
 				{
+					if (!PuzzleDates.ContainsKey(puzzleDateAttr.Year))
+						PuzzleDates[puzzleDateAttr.Year] = new();
+
+					PuzzleDates[puzzleDateAttr.Year].Add(puzzleDateAttr.Day);
 					serviceDictionary.Add((puzzleDateAttr.Year, puzzleDateAttr.Day), dayType);
 					serviceCollection.AddTransient(dayType);
 				}
@@ -37,6 +42,21 @@ namespace dev.sthorne.AdventOfCode.Puzzles
 
 				return serviceProvider.GetService(dayType) as IDay;
 			});
+		}
+
+		public List<int> GetYears()
+		{
+			return PuzzleDates.Keys.OrderBy(x => x).ToList();
+		}
+
+		public List<int> GetDays(int year)
+		{
+			return PuzzleDates[year].OrderBy(x => x).ToList();
+		}
+
+		public (int Year, int Day) GetLatestPuzzleDate()
+		{
+			return PuzzleDates.OrderByDescending(x => x.Key).Select(x => (x.Key, x.Value.OrderByDescending(x => x).FirstOrDefault())).FirstOrDefault();
 		}
 	}
 }
