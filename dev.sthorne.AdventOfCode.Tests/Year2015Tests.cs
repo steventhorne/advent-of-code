@@ -67,5 +67,19 @@ namespace dev.sthorne.AdventOfCode.Tests
 			var result = await day.Test(index, input);
 			Assert.AreEqual(result, expected);
 		}
+
+		[TestMethod]
+		[DataRow(0, "ugknbfddgicrmopn", 1)]
+		[DataRow(0, "aaa", 1)]
+		[DataRow(0, "jchzalrnumimnmhp", 0)]
+		[DataRow(0, "haegwjzuvuyypxyu", 0)]
+		[DataRow(0, "dvszwmarrgswjxmb", 0)]
+		public async Task Day_05Tests(int index, string input, object expected)
+		{
+			var logger = new Mock<ILogger<Day_05>>();
+			var day = new Day_05(logger.Object);
+			var result = await day.Test(index, input);
+			Assert.AreEqual(result, expected);
+		}
 	}
 }
