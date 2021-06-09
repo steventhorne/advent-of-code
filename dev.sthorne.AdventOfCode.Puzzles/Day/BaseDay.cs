@@ -25,8 +25,7 @@ namespace dev.sthorne.AdventOfCode.Puzzles.Day
 
 			Puzzles = new List<Func<Task<object>>>();
 
-			PuzzleDateAttribute pdAttr = GetType().GetCustomAttribute(typeof(PuzzleDateAttribute)) as PuzzleDateAttribute;
-			if (pdAttr != null)
+			if (GetType().GetCustomAttribute(typeof(PuzzleDateAttribute)) is PuzzleDateAttribute pdAttr)
 			{
 				Year = pdAttr.Year;
 				Day = pdAttr.Day;
@@ -60,7 +59,7 @@ namespace dev.sthorne.AdventOfCode.Puzzles.Day
 				Day = Day
 			};
 
-			Stopwatch sw = new Stopwatch();
+			Stopwatch sw = new();
 			sw.Start();
 
 			await ReadInput();
@@ -83,7 +82,24 @@ namespace dev.sthorne.AdventOfCode.Puzzles.Day
 			return solutionData;
 		}
 
-		private TimeSpan RecordDuration(Stopwatch sw)
+		public async Task<object> Test(int puzzleIndex, string input)
+		{
+			if (Puzzles == null || Puzzles.Count == 0)
+				throw new NullReferenceException("There are no puzzles available for the specified day.");
+
+			if (puzzleIndex < 0 && puzzleIndex >= Puzzles.Count)
+				throw new IndexOutOfRangeException();
+
+			var puzzle = Puzzles[puzzleIndex];
+			if (puzzle == null)
+				throw new NullReferenceException("Puzzle at specified index is null.");
+
+			RawInput = input;
+			await ProcessInput();
+			return await puzzle();
+		}
+
+		private static TimeSpan RecordDuration(Stopwatch sw)
 		{
 			var ts = new TimeSpan(sw.Elapsed.Ticks);
 			sw.Restart();
