@@ -85,5 +85,17 @@ namespace dev.sthorne.AdventOfCode.Tests
 			var result = await day.Test(index, input);
 			Assert.AreEqual(expected, result);
 		}
+
+		[TestMethod]
+		[DataRow(0, "turn on 0,0 through 999,999", 1000000)]
+		[DataRow(0, "turn on 0,0 through 999,999\ntoggle 0,0 through 999,0", 999000)]
+		[DataRow(0, "turn on 0,0 through 999,999\ntoggle 0,0 through 999,0\nturn off 499,499 through 500,500", 998996)]
+		public async Task Day_06Tests(int index, string input, object expected)
+		{
+			var logger = new Mock<ILogger<Day_06>>();
+			var day = new Day_06(logger.Object);
+			var result = await day.Test(index, input);
+			Assert.AreEqual(expected, result);
+		}
 	}
 }
