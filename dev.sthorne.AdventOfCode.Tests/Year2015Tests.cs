@@ -26,7 +26,7 @@ namespace dev.sthorne.AdventOfCode.Tests
 			var logger = new Mock<ILogger<Day_01>>();
 			var day = new Day_01(logger.Object);
 			var result = await day.Test(index, input);
-			Assert.AreEqual(result, expected);
+			Assert.AreEqual(expected, result);
 		}
 
 		[TestMethod]
@@ -39,7 +39,7 @@ namespace dev.sthorne.AdventOfCode.Tests
 			var logger = new Mock<ILogger<Day_02>>();
 			var day = new Day_02(logger.Object);
 			var result = await day.Test(index, input);
-			Assert.AreEqual(result, expected);
+			Assert.AreEqual(expected, result);
 		}
 
 		[TestMethod]
@@ -54,7 +54,7 @@ namespace dev.sthorne.AdventOfCode.Tests
 			var logger = new Mock<ILogger<Day_03>>();
 			var day = new Day_03(logger.Object);
 			var result = await day.Test(index, input);
-			Assert.AreEqual(result, expected);
+			Assert.AreEqual(expected, result);
 		}
 
 		[TestMethod]
@@ -65,7 +65,7 @@ namespace dev.sthorne.AdventOfCode.Tests
 			var logger = new Mock<ILogger<Day_04>>();
 			var day = new Day_04(logger.Object);
 			var result = await day.Test(index, input);
-			Assert.AreEqual(result, expected);
+			Assert.AreEqual(expected, result);
 		}
 
 		[TestMethod]
@@ -74,12 +74,16 @@ namespace dev.sthorne.AdventOfCode.Tests
 		[DataRow(0, "jchzalrnumimnmhp", 0)]
 		[DataRow(0, "haegwjzuvuyypxyu", 0)]
 		[DataRow(0, "dvszwmarrgswjxmb", 0)]
+        [DataRow(1, "qjhvhtzxzqqjkmpb", 1)]
+        [DataRow(1, "xxyxx", 1)]
+        [DataRow(1, "uurcxstgmygtbstg", 0)]
+        [DataRow(1, "ieodomkazucvgmuy", 0)]
 		public async Task Day_05Tests(int index, string input, object expected)
 		{
 			var logger = new Mock<ILogger<Day_05>>();
 			var day = new Day_05(logger.Object);
 			var result = await day.Test(index, input);
-			Assert.AreEqual(result, expected);
+			Assert.AreEqual(expected, result);
 		}
 	}
 }

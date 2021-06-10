@@ -1,4 +1,5 @@
 ﻿using dev.sthorne.AdventOfCode.Puzzles.Day;
+using dev.sthorne.AdventOfCode.Utils;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -27,10 +28,7 @@ namespace dev.sthorne.AdventOfCode.Puzzles._2015
 
 		protected override Task ProcessInput()
 		{
-			string[] lines = RawInput.Split(
-				new[] { "\r\n", "\r", "\n" },
-				StringSplitOptions.RemoveEmptyEntries
-			);
+            string[] lines = InputUtils.GetLines(RawInput);
 
 			foreach (var line in lines)
 			{
