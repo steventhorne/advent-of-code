@@ -11,7 +11,7 @@ namespace dev.sthorne.AdventOfCode.Puzzles.Day
 {
 	public abstract class BaseDay : IDay
 	{
-		private readonly ILogger Logger;
+		protected readonly ILogger Logger;
 
 		protected List<Func<Task<object>>> Puzzles;
 		protected int Year;
