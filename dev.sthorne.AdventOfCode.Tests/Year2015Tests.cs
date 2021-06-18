@@ -129,5 +129,21 @@ NOT y -> a
             var result = await day.Test(index, input);
             Assert.AreEqual(expected, result);
         }
+
+		[TestMethod]
+		[DataRow(0, @"""""", 2)]
+		[DataRow(0, @"""abc""", 2)]
+		[DataRow(0, @"""aaa\""aaa""", 3)]
+		[DataRow(0, @"""\x27""", 5)]
+		[DataRow(1, @"""""", 4)]
+		[DataRow(1, @"""abc""", 4)]
+		[DataRow(1, @"""aaa\""aaa""", 6)]
+		[DataRow(1, @"""\x27""", 5)]
+		public async Task Day_08Tests(int index, string input, object expected)
+		{
+			var day = new Day_08(GetLogger<Day_08>());
+			var result = await day.Test(index, input);
+			Assert.AreEqual(expected, result);
+		}
 	}
 }
