@@ -145,5 +145,16 @@ NOT y -> a
 			var result = await day.Test(index, input);
 			Assert.AreEqual(expected, result);
 		}
+
+		[TestMethod]
+		[DataRow(0, @"London to Dublin = 464
+London to Belfast = 518
+Dublin to Belfast = 141", 605)]
+		public async Task Day_09Tests(int index, string input, object expected)
+		{
+			var day = new Day_09(GetLogger<Day_09>());
+			var result = await day.Test(index, input);
+			Assert.AreEqual(expected, result);
+		}
 	}
 }
