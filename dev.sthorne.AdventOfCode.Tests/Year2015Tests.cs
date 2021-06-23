@@ -171,5 +171,15 @@ Dublin to Belfast = 141", 982)]
 			var result = await day.Test(index, input);
 			Assert.AreEqual(expected, result);
 		}
+
+		[TestMethod]
+		[DataRow(0, "abcdefgh", "abcdffaa")]
+		[DataRow(0, "ghijklmn", "ghjaabcc")]
+		public async Task Day_11Tests(int index, string input, object expected)
+		{
+			var day = new Day_11(GetLogger<Day_11>());
+			var result = await day.Test(index, input);
+			Assert.AreEqual(expected, result);
+		}
 	}
 }
