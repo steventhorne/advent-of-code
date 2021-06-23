@@ -150,6 +150,9 @@ NOT y -> a
 		[DataRow(0, @"London to Dublin = 464
 London to Belfast = 518
 Dublin to Belfast = 141", 605)]
+		[DataRow(1, @"London to Dublin = 464
+London to Belfast = 518
+Dublin to Belfast = 141", 982)]
 		public async Task Day_09Tests(int index, string input, object expected)
 		{
 			var day = new Day_09(GetLogger<Day_09>());
