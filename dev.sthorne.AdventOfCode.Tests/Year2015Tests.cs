@@ -161,11 +161,10 @@ Dublin to Belfast = 141", 982)]
 		}
 
 		[TestMethod]
-		[DataRow(0, "1", 2)]
-		[DataRow(0, "11", 2)]
-		[DataRow(0, "21", 4)]
-		[DataRow(0, "1211", 6)]
-		[DataRow(0, "111221", 6)]
+		[DataRow(0, "1", 82350)]
+		[DataRow(0, "21", 139984)]
+		[DataRow(1, "1", 1166642)]
+		[DataRow(1, "21", 1982710)]
 		public async Task Day_10Tests(int index, string input, object expected)
 		{
 			var day = new Day_10(GetLogger<Day_10>());
